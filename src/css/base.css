@@ -1,0 +1,42 @@
+:root {
+  font-family: Inter, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: .5px;
+
+  color-scheme: light dark;
+  background-color: #ECEFEC;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --light-bg: #FFF;
+  --dark-text: #141E12;
+  --gray-text: #6B716A;
+  --light-green: #F2FCF5;
+  --gray-border: #C3C8C2;
+  --lightgray-border: #E0E4E0;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: sans-serif;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  width: 100%;
+}
+
+button,
+label {
+    cursor: pointer;
+    border: none;
+}
