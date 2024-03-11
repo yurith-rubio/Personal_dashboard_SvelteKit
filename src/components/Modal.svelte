@@ -121,9 +121,6 @@
     position: relative;
     z-index: 11;
   }
-  #ModalContainer.hide, #BgModal.hide, #Modal.hide{
-    display: none;
-  }
   #Modal{
     min-height: 50px;
     width: 900px;
@@ -131,9 +128,6 @@
     position: absolute;
     z-index: 12;
     box-shadow: 0 32px 64px 1px rgba(0,0,0,0.15);
-  }
-  #Modal.go-up{
-    animation: go-up 0.3s ease-in-out;
   }
   .modal-close-heading{
     display: flex;
@@ -182,7 +176,7 @@
     font-weight: 600;
     letter-spacing: 0;
   }
-  form input, form select, form input.checkbox{
+  form input, form select{
     background-color: transparent;
     border: 1px solid var(--gray-border);
     border-radius: 5px;
