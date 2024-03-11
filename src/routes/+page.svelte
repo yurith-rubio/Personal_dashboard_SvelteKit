@@ -2,6 +2,8 @@
     import { employees } from "$lib/employees";
     import EditButton from '../components/EditButton.svelte';
     import Modal from '../components/Modal.svelte';
+  import TagActive from "../components/TagActive.svelte";
+    import TagDepartment from "../components/TagDepartment.svelte";
 
     let OpenedModal : Modal;
   
@@ -36,8 +38,22 @@
             <td>{employee.firstName} {employee.lastName} 
               <span class="edit-button"><EditButton on:openModal={() => handleOpenModal(employee)} /></span>
             </td>
-            <td class="tag"><span class="{employee.department.toLowerCase()}">{employee.department}</span></td>
-            <td class="tag"><span class={employee.active ? "aktiv" : "inaktiv"}>{employee.active ? "Aktiv" : "Inaktiv"}</span></td>
+            {#if employee.department === "Management"}
+              <td class="tag"><TagDepartment text={employee.department} color="blue" /></td>
+            {:else if employee.department === "HR"}
+              <td class="tag"><TagDepartment text={employee.department} color="yellow" /></td>
+            {:else if employee.department === "IT"}
+              <td class="tag"><TagDepartment text={employee.department} color="green" /></td>
+            {:else if employee.department === "Other"}
+              <td class="tag"><TagDepartment text={employee.department} color="gray" /></td>
+            {:else}
+              <td></td>
+            {/if}
+            {#if employee.active === true }
+              <td class="tag"><TagDepartment text="Aktiv" color="green" /></td>
+            {:else}
+              <td class="tag"><TagDepartment text="Inaktiv" color="gray" /></td>
+            {/if}
             <td>{new Date(employee.created).toLocaleDateString("de")}</td>
             {#if employee.comment}
               <td class="comment">{employee.comment}</td>
@@ -102,7 +118,7 @@
   }
   /* ROW SELECTION */
   .employee-row:hover{
-    background-color: var(--light-green);  
+    background-color: var(--row-hover);  
   }
   .edit-button{
     opacity: 0;
@@ -111,22 +127,14 @@
     opacity: 1 !important;
   }
   /* ROWS */
-  td.key, .tag span{
+  td.key{
     font-weight: 600;
     font-size: 12px;
   }
   .comment::first-letter {
     text-transform:capitalize;
   }
-  span.management{
-    background-color: #DEF1FF;
-    color: #0063AA;
-  }
-  span.hr{
-    background-color: #FFF1DA;
-    color: #C47E0A;
-  }
-  span.it, span.aktiv{
+  span.aktiv{
     background-color: #E1FAEA;
     color: #018030;
   }
@@ -134,10 +142,7 @@
     background-color: #E6E9E6;
     color: #6B716A;
   }
-  .tag span{
-    padding: 0 8px;
-    border-radius: 5px;
-  }
+  
   tfoot td{
     font-size: 10px;
     font-weight: 600;

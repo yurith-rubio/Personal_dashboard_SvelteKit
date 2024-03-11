@@ -2,6 +2,7 @@
     import close from '$lib/x.svg'
     export let data: IEmployee | undefined;
     export let visible: boolean = false;
+    import TagDepartment from './TagDepartment.svelte';
 
     export function showModal() {
         visible = true;
@@ -69,6 +70,7 @@
                   <option value="HR">HR</option>
                   <option value="Management">Management</option>
                   <option value="IT">IT</option>
+                <select/>
               </label>
               <label class="checkbox">
                 <input type="checkbox" name="status" value="aktiv" bind:checked={data.active}/> {data.active ? "Aktiv" : "Inaktiv"}
@@ -88,8 +90,22 @@
                   <div class="gray bold">{data.employeeKey.toUpperCase()}</div>
                 </div>
                 <div class="tag">
-                  <span class={data.department.toLowerCase()}>{data.department}</span>
-                  <span class={data.active ? "aktiv" : "inaktiv"}>{data.active ? "Aktiv" : "Inaktiv"}</span>
+                  {#if data.department === "Management"}
+                    <TagDepartment text={data.department} color="blue" />
+                  {:else if data.department === "HR"}
+                    <TagDepartment text={data.department} color="yellow" />
+                  {:else if data.department === "IT"}
+                    <TagDepartment text={data.department} color="green" />
+                  {:else if data.department === "Other"}
+                    <TagDepartment text={data.department} color="gray" />
+                  {:else}
+                    <td></td>
+                  {/if}
+                  {#if data.active === true }
+                    <TagDepartment text="Aktiv" color="green" />
+                  {:else}
+                    <TagDepartment text="Inaktiv" color="gray" />
+                  {/if}
                 </div>
               </div>
             </div>
@@ -171,7 +187,7 @@
   form label{
     display: flex;
     flex-direction: column;
-    color: var(--gray-text);
+    color: var(--gray);
     margin-bottom: 16px;
     font-weight: 600;
     letter-spacing: 0;
@@ -180,7 +196,7 @@
     background-color: transparent;
     border: 1px solid var(--gray-border);
     border-radius: 5px;
-    color: var(--gray-text);
+    color: var(--gray);
     font-size: 14px;
   }
   label.checkbox{
@@ -219,6 +235,6 @@
     color: var(--dark-text);
   }
   .gray{
-    color: var(--gray-text);
+    color: var(--gray);
   }
 </style>

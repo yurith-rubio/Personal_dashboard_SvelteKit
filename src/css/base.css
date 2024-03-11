@@ -15,10 +15,18 @@
 
   --light-bg: #FFF;
   --dark-text: #141E12;
-  --gray-text: #6B716A;
-  --light-green: #F2FCF5;
+  --row-hover: #F2FCF5;
   --gray-border: #C3C8C2;
   --lightgray-border: #E0E4E0;
+
+  --light-blue: #DEF1FF;
+  --blue: #0063AA;
+  --light-yellow:#FFF1DA;
+  --yellow: #C47E0A;
+  --light-green: #E1FAEA;
+  --green: #018030;
+  --light-gray:#E6E9E6;
+  --gray: #6B716A;
 }
 
 html {
@@ -39,4 +47,13 @@ button,
 label {
     cursor: pointer;
     border: none;
+}
+
+.tag span{
+  font-weight: 600;
+  font-size: 12px;
+}
+.tag span{
+  padding: 0 8px;
+  border-radius: 5px;
 }
