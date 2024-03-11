@@ -79,7 +79,6 @@
     padding: 4.8rem;
     height: 100vh;
   }
-
   /* TABLE */
   #TableContainer{
     overflow: hidden;
@@ -134,31 +133,11 @@
   .comment::first-letter {
     text-transform:capitalize;
   }
-  span.aktiv{
-    background-color: #E1FAEA;
-    color: #018030;
-  }
-  span.other, span.inaktiv{
-    background-color: #E6E9E6;
-    color: #6B716A;
-  }
-  
   tfoot td{
     font-size: 10px;
     font-weight: 600;
     line-height: 14px;
     letter-spacing: 1px;
-  }
-  @keyframes go-up {
-  
-    0% {
-      transform: translateY(10%);
-      opacity: 0;
-    }
-    100% {
-      transform: translateY(0);
-      opacity: 1;
-    }
   }
   </style>
 
