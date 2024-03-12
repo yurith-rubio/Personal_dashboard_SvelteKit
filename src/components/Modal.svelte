@@ -2,7 +2,7 @@
     import close from '$lib/x.svg'
     export let data: IEmployee | undefined;
     export let visible: boolean = false;
-    import TagDepartment from './TagDepartment.svelte';
+    import Tag from './Tag.svelte';
 
     export function showModal() {
         visible = true;
@@ -10,38 +10,11 @@
 
     export function hideModal() {
         visible = false;
-    }
-
-    
-    
-    // function handleSubmitForm(event: Event) {
-    //   event.preventDefault();
-    //   // replace original with modified employee
-    //   employeesData = employeesData.map((employee) => {
-    //     if (employee.employeeKey === data.employeeKey) {
-    //       return data;
-    //     }
-    //     return employee;
-    //   });
-    //   open = false;
-    // }
-
-    // handle closing the modal without saving
-    function handleCloseModal() {
-      // find original employee and reset the data one to it
-      // const original = employees.find((employee) => employee.employeeKey === data.employeeKey);
-      // if (original) {
-      //   data = original;
-      // }
-
-      document.documentElement.style.overflow = "auto";
-      visible = false;
-    }
+    }    
 
 </script>
-
+{#if data && visible}
 <div id="ModalContainer" class:visible >
-    {#if data && visible}
     <button id="BgModal" class:visible on:click={hideModal}></button>
     <div id="Modal">
       <div class="modal-close-heading">
@@ -53,19 +26,19 @@
             <form>
               <label class="personalnummer">
                 Personalnummer
-                <input readonly value={data.employeeKey} name="personalnummer" type="text"/>
+                <input readonly id="personalnummer" name="personalnummer" type="text" bind:value={data.employeeKey}/>
               </label>
               <label>
                 Vorname
-                <input bind:value={data.firstName} name="vorname" type="text"/>
+                <input id="vorname" bind:value={data.firstName} name="vorname" type="text"/>
               </label>
               <label>
                 Nachname
-                <input bind:value={data.lastName} name="nachname" type="text"/>
+                <input id="nachname" bind:value={data.lastName} name="nachname" type="text"/>
               </label>
               <label>
                 Abteilung
-                <select bind:value={data.department} name="abteilung">
+                <select id="abteilung" bind:value={data.department} name="abteilung">
                   <option value="Other">Other</option>
                   <option value="HR">HR</option>
                   <option value="Management">Management</option>
@@ -73,7 +46,7 @@
                 <select/>
               </label>
               <label class="checkbox">
-                <input type="checkbox" name="status" value="aktiv" bind:checked={data.active}/> {data.active ? "Aktiv" : "Inaktiv"}
+                <input id="aktiv" type="checkbox" name="status" value="aktiv" bind:checked={data.active}/> {data.active ? "Aktiv" : "Inaktiv"}
               </label>
               <div class="div-submit-btn flex">
                 <button type="submit">Speichern</button>
@@ -91,20 +64,20 @@
                 </div>
                 <div class="tag">
                   {#if data.department === "Management"}
-                    <TagDepartment text={data.department} color="blue" />
+                    <Tag text={data.department} color="blue" />
                   {:else if data.department === "HR"}
-                    <TagDepartment text={data.department} color="yellow" />
+                    <Tag text={data.department} color="yellow" />
                   {:else if data.department === "IT"}
-                    <TagDepartment text={data.department} color="green" />
+                    <Tag text={data.department} color="green" />
                   {:else if data.department === "Other"}
-                    <TagDepartment text={data.department} color="gray" />
+                    <Tag text={data.department} color="gray" />
                   {:else}
                     <td></td>
                   {/if}
                   {#if data.active === true }
-                    <TagDepartment text="Aktiv" color="green" />
+                    <Tag text="Aktiv" color="green" />
                   {:else}
-                    <TagDepartment text="Inaktiv" color="gray" />
+                    <Tag text="Inaktiv" color="gray" />
                   {/if}
                 </div>
               </div>
@@ -112,8 +85,9 @@
           </div>
       </div>
   </div>
-  {/if}
-</div>  
+  
+</div>
+{/if}
 
 
 <style>

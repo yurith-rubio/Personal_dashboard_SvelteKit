@@ -1,9 +1,8 @@
 <script lang="ts">
-    import { employees } from "$lib/employees";
+    import { employees } from "../lib/employees";
     import EditButton from '../components/EditButton.svelte';
     import Modal from '../components/Modal.svelte';
-  import TagActive from "../components/TagActive.svelte";
-    import TagDepartment from "../components/TagDepartment.svelte";
+    import Tag from "../components/Tag.svelte";
 
     let OpenedModal : Modal;
   
@@ -14,67 +13,66 @@
   
       selectedEmployee = {...employee};
       OpenedModal.showModal();
-    }
-  
-  </script>
-  <main>
-    <table id="TableContainer">
-      <thead>
-        <tr>
-          <th>Personalnummer</th>
-          <th>Foto</th>
-          <th>Name</th>
-          <th>Abteilung</th>
-          <th>Status</th>
-          <th>Erstellt</th>
-          <th>Kommentar</th>
-        </tr>
-      </thead>
-      <tbody>
-        {#each employees as employee}
-          <tr class="employee-row">
-            <td class="key">{employee.employeeKey.toUpperCase()}</td>
-            <td><img class="avatar-img" src={`${employee.photo}`} alt={`${employee.firstName} ${employee.lastName} photo`} width="100" height="100" /></td>
-            <td>{employee.firstName} {employee.lastName} 
-              <span class="edit-button"><EditButton on:openModal={() => handleOpenModal(employee)} /></span>
-            </td>
-            {#if employee.department === "Management"}
-              <td class="tag"><TagDepartment text={employee.department} color="blue" /></td>
-            {:else if employee.department === "HR"}
-              <td class="tag"><TagDepartment text={employee.department} color="yellow" /></td>
-            {:else if employee.department === "IT"}
-              <td class="tag"><TagDepartment text={employee.department} color="green" /></td>
-            {:else if employee.department === "Other"}
-              <td class="tag"><TagDepartment text={employee.department} color="gray" /></td>
-            {:else}
-              <td></td>
-            {/if}
-            {#if employee.active === true }
-              <td class="tag"><TagDepartment text="Aktiv" color="green" /></td>
-            {:else}
-              <td class="tag"><TagDepartment text="Inaktiv" color="gray" /></td>
-            {/if}
-            <td>{new Date(employee.created).toLocaleDateString("de")}</td>
-            {#if employee.comment}
-              <td class="comment">{employee.comment}</td>
-            {:else}
-              <td></td>
-            {/if}
-          </tr>
-        {/each}
-      </tbody>
-      <tfoot>
-        <tr>
-          <td>{employees.length} Einträge</td>
-        </tr>
-      </tfoot>
-    </table>
-  </main>
-  
-  <Modal data={selectedEmployee} bind:this={OpenedModal} />
+    }  
+</script>
 
+<main>
+  <table id="TableContainer">
+    <thead>
+      <tr>
+        <th>Personalnummer</th>
+        <th>Foto</th>
+        <th>Name</th>
+        <th>Abteilung</th>
+        <th>Status</th>
+        <th>Erstellt</th>
+        <th>Kommentar</th>
+      </tr>
+    </thead>
+    <tbody>
+      {#each employees as employee}
+        <tr class="employee-row">
+          <td class="key">{employee.employeeKey.toUpperCase()}</td>
+          <td><img class="avatar-img" src={`${employee.photo}`} alt={`${employee.firstName} ${employee.lastName} photo`} width="100" height="100" /></td>
+          <td>{employee.firstName} {employee.lastName} 
+            <span class="edit-button"><EditButton on:openModal={() => handleOpenModal(employee)} /></span>
+          </td>
+          {#if employee.department === "Management"}
+            <td class="tag"><Tag text={employee.department} color="blue" /></td>
+          {:else if employee.department === "HR"}
+            <td class="tag"><Tag text={employee.department} color="yellow" /></td>
+          {:else if employee.department === "IT"}
+            <td class="tag"><Tag text={employee.department} color="green" /></td>
+          {:else if employee.department === "Other"}
+            <td class="tag"><Tag text={employee.department} color="gray" /></td>
+          {:else}
+            <td></td>
+          {/if}
+          {#if employee.active === true }
+            <td class="tag"><Tag text="Aktiv" color="green" /></td>
+          {:else}
+            <td class="tag"><Tag text="Inaktiv" color="gray" /></td>
+          {/if}
+          <td>{new Date(employee.created).toLocaleDateString("de")}</td>
+          {#if employee.comment}
+            <td class="comment">{employee.comment}</td>
+          {:else}
+            <td></td>
+          {/if}
+        </tr>
+      {/each}
+    </tbody>
+    <tfoot>
+      <tr>
+        <td>{employees.length} Einträge</td>
+      </tr>
+    </tfoot>
+  </table>
+</main>
+  
+<Modal data={selectedEmployee} bind:this={OpenedModal} />
 
-  <style>
+<style>
   main{
     padding: 4.8rem;
     height: 100vh;
@@ -139,7 +137,7 @@
     line-height: 14px;
     letter-spacing: 1px;
   }
-  </style>
+</style>
 
 
     
