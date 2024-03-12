@@ -3,6 +3,7 @@
     export let data: IEmployee | undefined;
     export let visible: boolean = false;
     import Tag from './Tag.svelte';
+    import { enhance } from '$app/forms';
 
     export function showModal() {
         visible = true;
@@ -23,22 +24,22 @@
       <div class="modal-content flex">
           <div class="modal-form flex">
             <div class="modal-title dark">Aktuelle Daten</div>
-            <form>
+            <form method="POST" use:enhance>
               <label class="personalnummer">
                 Personalnummer
-                <input readonly id="personalnummer" name="personalnummer" type="text" bind:value={data.employeeKey}/>
+                <input readonly name="personalnummer" type="text" bind:value={data.employeeKey}/>
               </label>
               <label>
                 Vorname
-                <input id="vorname" bind:value={data.firstName} name="vorname" type="text"/>
+                <input bind:value={data.firstName} name="vorname" type="text"/>
               </label>
               <label>
                 Nachname
-                <input id="nachname" bind:value={data.lastName} name="nachname" type="text"/>
+                <input bind:value={data.lastName} name="nachname" type="text"/>
               </label>
               <label>
                 Abteilung
-                <select id="abteilung" bind:value={data.department} name="abteilung">
+                <select bind:value={data.department} name="abteilung">
                   <option value="Other">Other</option>
                   <option value="HR">HR</option>
                   <option value="Management">Management</option>
@@ -46,7 +47,7 @@
                 <select/>
               </label>
               <label class="checkbox">
-                <input id="aktiv" type="checkbox" name="status" value="aktiv" bind:checked={data.active}/> {data.active ? "Aktiv" : "Inaktiv"}
+                <input type="checkbox" name="status" value="aktiv" bind:checked={data.active}/> {data.active ? "Aktiv" : "Inaktiv"}
               </label>
               <div class="div-submit-btn flex">
                 <button type="submit">Speichern</button>

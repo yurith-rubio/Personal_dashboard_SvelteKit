@@ -1,5 +1,7 @@
 <script lang="ts">
-    import { employees } from "../lib/employees";
+  import { employees } from '$lib/employees';
+
+    // import { employees } from "../lib/employees";
     import EditButton from '../components/EditButton.svelte';
     import Modal from '../components/Modal.svelte';
     import Tag from "../components/Tag.svelte";
@@ -7,7 +9,9 @@
     let OpenedModal : Modal;
   
     let selectedEmployee: IEmployee | undefined = undefined;
-  
+
+    export let data;
+
     function handleOpenModal(employee: IEmployee) {
       document.documentElement.style.overflow = "hidden";
   
@@ -30,7 +34,7 @@
       </tr>
     </thead>
     <tbody>
-      {#each employees as employee}
+      {#each data.employees as employee}
         <tr class="employee-row">
           <td class="key">{employee.employeeKey.toUpperCase()}</td>
           <td><img class="avatar-img" src={`${employee.photo}`} alt={`${employee.firstName} ${employee.lastName} photo`} width="100" height="100" /></td>
