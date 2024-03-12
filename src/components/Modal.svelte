@@ -10,6 +10,7 @@
     }
 
     export function hideModal() {
+      document.documentElement.style.overflow = "";
         visible = false;
     }    
 
@@ -24,7 +25,7 @@
       <div class="modal-content flex">
           <div class="modal-form flex">
             <div class="modal-title dark">Aktuelle Daten</div>
-            <form method="POST" use:enhance>
+            <form method="POST" use:enhance on:submit={hideModal}>
               <label class="personalnummer">
                 Personalnummer
                 <input readonly name="personalnummer" type="text" bind:value={data.employeeKey}/>
