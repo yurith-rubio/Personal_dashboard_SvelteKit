@@ -16,7 +16,6 @@ export function updateEmployee(form: FormData) {
 
         // let nachname = data.get('nachname') as string;
         if (employee.employeeKey === form.get('personalnummer')) {
-            console.log("updating employee", form);
             return {
                 employeeKey: employee.employeeKey,
                 active: aktiv === 'true' ? true : false,
